@@ -7,6 +7,7 @@ import listingRouter from './routes/listing.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import cors from 'cors';
+// const cors = require()
 dotenv.config();
 
 mongoose
@@ -37,7 +38,7 @@ var corsOptionsDelegate = function (req, callback) {
     callback(null, corsOptions) // callback expects two parameters: error and options
 }
 
-app.use(require('cors')(corsOptionsDelegate));
+app.use(cors(corsOptionsDelegate));
 app.listen(3000, () => {
   console.log('Server is running on port 3000!');
 });
