@@ -28,17 +28,20 @@ app.use(express.json());
 
 app.use(cookieParser());
 var allowlist = ["https://real-estate15-1.onrender.com","https://real-estate15-temp-frontend.onrender.com", "https://firebasestorage.googleapis.com/v0/b/realestate-7b68.appspot.com","https://firebasestorage.googleapis.com/v0/b/realestate-7b68.appspot.com/*","*"]
-var corsOptionsDelegate = function (req, callback) {
-    var corsOptions;
-    if (allowlist.indexOf(req.header('Origin')) !== -1) {
-        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-    } else {
-        corsOptions = { origin: false } // disable CORS for this request
-    }
-    callback(null, corsOptions) // callback expects two parameters: error and options
-}
-
-app.use(cors(corsOptionsDelegate));
+// var corsOptionsDelegate = function (req, callback) {
+//     var corsOptions;
+//     if (allowlist.indexOf(req.header('Origin')) !== -1) {
+//         corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+//     } else {
+//         corsOptions = { origin: false } // disable CORS for this request
+//     }
+//     callback(null, corsOptions) // callback expects two parameters: error and options
+// }
+const corsOptions = {
+  credentials: true,
+  origin: allowlist // Whitelist the domains you want to allow
+};
+app.use(cors(corsOptions));
 app.listen(3000, () => {
   console.log('Server is running on port 3000!');
 });
