@@ -22,7 +22,7 @@ mongoose
 
 const app = express();
 
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 
 app.use(cookieParser());
@@ -37,7 +37,7 @@ var corsOptionsDelegate = function (req, callback) {
     callback(null, corsOptions) // callback expects two parameters: error and options
 }
 
-// app.use(require('cors')(corsOptionsDelegate));
+app.use(require('cors')(corsOptionsDelegate));
 app.listen(3000, () => {
   console.log('Server is running on port 3000!');
 });
